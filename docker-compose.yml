@@ -1,0 +1,34 @@
+# docker-compose.yml
+# 사용자 커스텀이 된 가상의 PostgreSQL 창고를 연다.
+# 추후 Redis(책상 위 메모지)도 추가 될 예정
+
+services:
+  db:
+    # postgre 16번 버전 이미지를 그대로 사용한다. (이미지 = 설치 파일)
+    image: postgres:16
+    # 창고 이름표 log를 볼 때 "docker logs kkok-db" 와 같이 편리하게 확인할 수 있다.
+    container_name: kkok-db
+    # .env 파일에 값을 가져와 container 안에 환경변수로 넣어준다.
+    # → 비밀번호를 코드에 직접 입력하지 않고 .env 파일에서 가져옴.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    # 내 컴퓨터의 5433번 문(port) ↔ container 안의 5432번 문을 연결
+    # port를 설정해두면 container 밖에서 DB에 접속할 수 있다. (예: FastAPI, HeidiSQL)
+    ports:
+      - "5433:5432"
+    # container 를 삭제해도 데이터는 남길 수 있도록, 별도의 저장 공간(volume)에 실제 데이터를 보관
+    # container = 매장, volume = 창고 건물. 매장이 무너져도 창고는 무너지지 않는 한 물건은 그대로다.
+    volumes:
+      - kkok_db_data:/var/lib/postgresql/data
+    # docker가 잘 살아있는지 주기적으로 체크하는 매뉴얼
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+# 위에서 설정한 volume(창고 건물)의 이름을 등록
+volumes:
+  kkok_db_data:
