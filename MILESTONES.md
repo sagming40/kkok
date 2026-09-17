@@ -169,18 +169,18 @@ flowchart LR
 - [x] `docs/` 폴더 구성 (설계 문서 5종, `DEVLOG`·`MILESTONES`·`README`는 저장소 루트 유지)
 - [x] `.gitignore`, `.env.example`, `README.md` 작성
 - [ ] `frontend/` 폴더 구성
-- [ ] `backend/` 폴더 구성
+- [x] `backend/` 폴더 구성
 
 **인프라**
 - [x] `docker-compose.yml`에 PostgreSQL 추가 (데이터는 볼륨에 저장)
 - [x] `docker compose up`으로 DB 실행 확인
 
 **백엔드**
-- [ ] Python 가상환경 · 의존성 관리 도구 설정
-- [ ] FastAPI 앱 뼈대 (`app/main.py`, `api/`, `services/`, `repositories/`, `models/`, `schemas/`, `core/`)
-- [ ] 설정 관리 (`core/config.py`, 환경변수에서 읽기)
-- [ ] async DB 연결 (`AsyncSession` + `asyncpg`)
-- [ ] 공통 에러 응답 형식과 예외 처리기
+- [x] Python 가상환경 · 의존성 관리 도구 설정
+- [x] FastAPI 앱 뼈대 (`app/main.py`, `api/`, `services/`, `repositories/`, `models/`, `schemas/`, `core/`)
+- [x] 설정 관리 (`core/config.py`, 환경변수에서 읽기)
+- [x] async DB 연결 (`AsyncSession` + `asyncpg`)
+- [x] 공통 에러 응답 형식과 예외 처리기
 - [ ] `GET /api/health` (DB 연결 확인 포함)
 - [ ] `alembic init -t async` 로 마이그레이션 초기화
 - [ ] pytest + async 플러그인 설정, health 테스트 1개

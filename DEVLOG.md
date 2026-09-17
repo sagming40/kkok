@@ -90,7 +90,30 @@
 
 ---
 
-### 2026-09-17 (목) · M1
+### 2026-09-17 (목/저녁~밤/집 PC) · M1
+
+**한 일**
+- README.md를 따라 집 PC에서 기기에 맞춰 개발 환경을 다시 세팅함
+  - Docker Desktop 설치 (집 PC는 WSL2가 이미 활성화되어 있었음)
+  - 저장소 클론(kkok) → .env 세팅 → DB 실행(`docker compose up -d`) PostgreSQL 컨테이너 정상 기동 확인 완료
+  - 백엔드 실행 ─ Python 가상환경 `backend/.venv` 생성 → 의존성 패키지 설치(`backend/ pip install -r requirements-dev.txt`)
+  - 서버 정상 작동 확인 완료 ─ `uvicorn app.main:app --reload` 
+- `core/config.py` 작성 — `.env`(저장소 루트) 기반 설정 관리, `pydantic-settings`로 `DATABASE_URL` 로드 확인
+- `core/db.py` 작성 — async Engine + `session_factory` + `get_db` 의존성, PostgreSQL 연결 확인 (`select pg_catalog.version()`)
+- `core/exceptions.py`, `core/error_handlers.py` 작성 — `AppError` 및 3종 예외 처리기, `04_api-spec.md` 3.1절 형식으로 통일 확인
+
+**막힌 것 · 해결**
+- 학교 PC에서 만든 `.venv`는 Git에 추적되지 않으므로, 집 PC에서도 새로 생성함 → 기기마다 `.venv` 재생성 후 `requirements-dev.txt` 설치로 해결
+- PowerShell의 `curl`(=`Invoke-WebRequest`)이 4xx/5xx 응답에서 본문 대신 예외를 던짐 → 브라우저로 실제 응답 재확인, 동작 자체는 정상이었음을 확인
+
+**다음 할 일**
+- `GET /api/health` 구현 (DB 연결 확인 포함, 3층 구조 중 첫 Router)
+- `alembic init -t async` 마이그레이션 초기화
+- pytest + async 플러그인 설정, health 테스트 1개
+
+---
+
+### 2026-09-17 (목/오후/학교 PC) · M1
 
 **한 일**
 - Docker Desktop 설치 (WSL2 활성화 포함), 도구 버전 확인 (Git 2.53, Python 3.13.9, Node 24.16, Docker 29.8.0)
@@ -98,6 +121,9 @@
 - `docker compose up -d`로 PostgreSQL 컨테이너 정상 기동 확인
 - `chore/dev-env` 브랜치 PR #1 병합 (`main`에 반영)
 - `MILESTONES.md` M1 체크박스 세분화 및 완료 항목 체크
+- `backend/` 폴더 구성, Python 가상환경(`.venv`) 생성
+- 의존성을 `requirements.txt`(운영) / `requirements-dev.txt`(개발)로 분리, 버전 고정
+- `app/` 폴더 뼈대 구성 (`api/`, `services/`, `repositories/`, `models/`, `schemas/`, `core/`), `app/main.py` 작성 및 `/docs` 정상 기동 확인
 
 **막힌 것 · 해결**
 - 학교 PC에 Docker 미설치 확인 (`docker : 'docker' 용어가... 인식되지 않습니다`) → Docker Desktop 설치로 해결
@@ -111,7 +137,7 @@
 
 ---
 
-### 2026-09-17 (목) · M0
+### 2026-09-17 (목/오전/학교 PC) · M0
 
 **한 일**
 - 프로젝트 컨셉 확정: 단축 URL + 클릭 분석 서비스, 이름 "콕(kkok)"
