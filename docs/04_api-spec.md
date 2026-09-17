@@ -276,7 +276,7 @@ Cache-Control: no-store
 - 안내 페이지는 Vue 화면이다. `/notice/...`는 두 단계 경로라 Nginx 규칙상 Vue로 가고, `notice`는 **예약어**에 추가한다.
 - 안내 페이지로 보낼 때 상태 코드가 404가 아니라 302가 되는 건 알고 쓰는 단순화다.
 
-처리 순서는 `kkok-architecture.md` 4.1 참고.
+처리 순서는 `02_architecture.md` 4.1 참고.
 
 ### 4.2 `GET /api/health` — 서버 상태 확인
 
@@ -288,6 +288,7 @@ Cache-Control: no-store
 
 - Docker Compose · 배포 환경에서 "서버가 살아 있는지" 확인하는 데 쓴다.
 - DB나 Redis 연결이 안 되면 `503`과 함께 해당 항목을 `"error"`로 표시한다.
+- `redis` 항목은 Redis가 도입되는 **M3부터** 응답에 포함한다. M1~M2에서는 `status`, `database`만 돌려준다.
 
 ---
 
@@ -891,6 +892,6 @@ flowchart LR
 ## 13. 남은 미정 사항
 
 - [ ] Redis 만료 시간 · 제한 횟수 확정 (로그인 · 링크 생성 · 초대 코드 실패)
-- [ ] 차트 라이브러리 최종 선택 (ECharts vs ApexCharts)
+- [x] 차트 라이브러리 최종 선택 (**ECharts** vs ~~ApexCharts~~)
 - [ ] Refresh Token Rotation 도입 시점
 - [ ] 서비스 기본 주소 (배포 도메인)
