@@ -165,13 +165,15 @@ flowchart LR
 ### 작업
 
 **저장소**
-- [ ] GitHub 저장소 `kkok` 생성, `frontend/` · `backend/` · `docs/` 폴더 구성
-- [ ] 설계 문서 5종과 이 문서를 `docs/`로 이동
-- [ ] `.gitignore`, `.env.example`, `README.md` 작성
+- [x] GitHub 저장소 `kkok` 생성
+- [x] `docs/` 폴더 구성 (설계 문서 5종, `DEVLOG`·`MILESTONES`·`README`는 저장소 루트 유지)
+- [x] `.gitignore`, `.env.example`, `README.md` 작성
+- [ ] `frontend/` 폴더 구성
+- [ ] `backend/` 폴더 구성
 
 **인프라**
-- [ ] `docker-compose.yml`에 PostgreSQL 추가 (데이터는 볼륨에 저장)
-- [ ] `docker compose up`으로 DB 실행 확인
+- [x] `docker-compose.yml`에 PostgreSQL 추가 (데이터는 볼륨에 저장)
+- [x] `docker compose up`으로 DB 실행 확인
 
 **백엔드**
 - [ ] Python 가상환경 · 의존성 관리 도구 설정
