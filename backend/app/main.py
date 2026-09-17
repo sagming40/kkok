@@ -4,6 +4,8 @@
 
 from fastapi import FastAPI
 
+from app.core.error_handlers import register_error_handlers
+
 # FastAPI() = 가게를 하나 차린다.
 # title과 version은 간판이다. /docs 화면 맨 위에 그대로 적힌다.
 # version은 v0.1.0으로 맞춘다. (완료 기준)
@@ -11,6 +13,9 @@ app = FastAPI(
     title="콕 (kkok) API",
     version="0.1.0",
 )
+
+# 예외 응대 매뉴얼을 가게 전체에 붙인다.
+register_error_handlers(app)
 
 # 이제 막 차린 가게라 메뉴(router)가 하나도 없다.
 # 추후 api/health.py를 만들어 메뉴판을 붙인다. ─ app.include_router
