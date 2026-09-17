@@ -1,0 +1,9 @@
+# 운영용 짐을 먼저 모두 싣는다.
+-r requirements.txt
+
+# 검수 담당자: code가 약속대로 동작하는지 확인
+pytest==9.1.1
+# 검수 담당자가 async 함수도 검사할 수 있게 해주는 plugin
+pytest-asyncio==1.4.0
+# 가짜 손님: server를 실제로 띄우지 않고도 요청을 보내볼 수 있게 해줌
+httpx==0.28.1

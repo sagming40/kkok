@@ -1,0 +1,12 @@
+# 가게 본체: 주문(HTTP 요청)을 받아 처리하는 Web Framework
+fastapi==0.141.1
+# 건물 관리인: 가게 문을 열고 손님(요청)을 안으로 들여보내는 server
+uvicorn[standard]==0.53.0
+# 창고 관리 규칙집(ORM) ─ [asyncio]는 "주문해놓고 딴 일 하기" 방식 지원
+sqlalchemy[asyncio]==2.0.54
+# PostgreSQL 창고까지 가는 비동기 전용 트럭
+asyncpg==0.31.0
+# 창고 선반 구조 변경 이력 관리 (migration)
+alembic==1.20.0
+# .env 쪽지를 읽어서 설정값으로 바꿔주는 도구
+pydantic-settings==2.15.0
