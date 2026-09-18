@@ -11,7 +11,15 @@ settings = get_settings()
 # Engine = 창고로 가는 도로. App이 켜져 있는 동안 딱 하나만 만들어서 계속 사용한다.
 # echo=True로 주게 되면 실제 SQL 문장이 Terminal에 그대로 찍힌다.
 # 지금은 "도로가 제대로 뚫렸는지" 직관적으로 확인하기 위해 켜둔다. ─ 추후 log가 불어나면 False로 끈다.
-engine = create_async_engine(settings.database_url, echo=True)
+engine = create_async_engine(
+    settings.database_url,
+    echo=True,
+    # pool_pre_ping=True:
+    # 트럭을 대여해주기 직전에 "테스트 시동(가벼운 확인 요청)"을 건다.
+    # 시동이 걸리지 않으면 해당 트럭을 폐차 후 새 트럭을 내어준다.
+    # DB Container 를 껐다 켰을 때 대여소에 남아 있던 "폐 트럭"도 걸러진다.
+    pool_pre_ping=True,
+)
 
 # async_sessionmaker = "트럭 대여소"
 # "트럭 한 대" 요청을 보내면(session_factory()) 새 트럭을 보내준다.

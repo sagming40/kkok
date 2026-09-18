@@ -4,6 +4,7 @@
 
 from fastapi import FastAPI
 
+from app.api import health
 from app.core.error_handlers import register_error_handlers
 
 # FastAPI() = 가게를 하나 차린다.
@@ -17,5 +18,8 @@ app = FastAPI(
 # 예외 응대 매뉴얼을 가게 전체에 붙인다.
 register_error_handlers(app)
 
-# 이제 막 차린 가게라 메뉴(router)가 하나도 없다.
-# 추후 api/health.py를 만들어 메뉴판을 붙인다. ─ app.include_router
+# 메뉴판(router)을 가게에 붙인다.
+# ⚠️ 순서 규칙: 새 메뉴판은 아래로 차곡차곡 쌓는다.
+#    추후 구현할 redirect.router(/{code})는 "아무 주소나 다 받는" 메뉴라서
+#    반드시 맨 마지막 줄이어야 한다. 위 쪽에 위치해 있으면 다른 주소를 전부 가로채 버린다.
+app.include_router(health.router)
