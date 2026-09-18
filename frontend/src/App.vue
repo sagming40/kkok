@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 <template>
   <!-- Tailwind 스티커 확인: 화면 꽉 채우기 + 가운데 정렬 + 간격 -->
   <main class="flex min-h-screen flex-col items-center justify-center gap-4">
-    <h1 class="text-3xl font-bold">KKOK</h1>
+    <h1 class="text-3xl font-bold">콕 눌러 줄이기</h1>
     <!-- shadcn-vue 'Button' 확인 -->
     <Button>kkok!</Button> 
   </main> 

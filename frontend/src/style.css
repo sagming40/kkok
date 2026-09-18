@@ -1,5 +1,6 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Pretendard 가변 Fonts ─ 화면에 실제로 사용된 글자 조각만 골라 받아오는 버전(dynamic subset) */
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'); */
 
 /* Tailwind 스티커 세트 전체를 이 파일에 불러온다 */
 @import "tailwindcss";
@@ -8,6 +9,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Pretendard. 없으면 순차적으로 뒤쪽 Fonts로 대체 (예비 엔트리 명단) */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, 
+    system-ui, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -44,6 +48,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* 성공 · 경고 색 호스 ─ shadcn 기본엔 없어서 직접 연결 (text-success, bg-warning 스티커가 생김) */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 }
 
 :root {
@@ -54,18 +62,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #FF6B4A;                        /* Coral Orange (light) */ 
+  --primary-foreground: oklch(0.145 0 0);    /* Coral 위 글자 = 어두운 색 (3-0 결정) */
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #EF4444;                    /* 에러 */ 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: #FF6B4A;                           /* Keyboard Focus 테두리도 Coral → Focus 표시가 눈에 띄게 */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -79,6 +87,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  --success: #22C55E;
+  --warning: #F59E0B;
 }
 
 .dark {
@@ -88,18 +99,18 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: #FF8B6B;   /* Coral (dark) ─ 어두운 배경에서 눈이 쨍하지 않게 조금 밝고 부드럽게 */
+  --primary-foreground: oklch(0.145 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --destructive: #EF4444;
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: #FF8B6B;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -108,11 +119,14 @@
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);  
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --success: #22C55E;
+  --warning: #F59E0B;
 }
 
 @layer base {
