@@ -181,9 +181,9 @@ flowchart LR
 - [x] 설정 관리 (`core/config.py`, 환경변수에서 읽기)
 - [x] async DB 연결 (`AsyncSession` + `asyncpg`)
 - [x] 공통 에러 응답 형식과 예외 처리기
-- [ ] `GET /api/health` (DB 연결 확인 포함)
-- [ ] `alembic init -t async` 로 마이그레이션 초기화
-- [ ] pytest + async 플러그인 설정, health 테스트 1개
+- [x] `GET /api/health` (DB 연결 확인 포함)
+- [x] `alembic init -t async` 로 마이그레이션 초기화
+- [x] pytest + async 플러그인 설정, health 테스트 1개
 
 **프론트엔드**
 - [ ] Vite + Vue 3 + TypeScript 프로젝트 생성

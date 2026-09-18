@@ -113,6 +113,37 @@
 
 ---
 
+### 2026-09-18 (금/오전/학교 PC) · M1
+
+**한 일**
+- `GET /api/health` 구현 — Router → Service → Repository 3층 구조 첫 관통
+  - `schemas/health.py` — `HealthResponse`, `CheckStatus`(Literal로 ok/error만 허용)
+  - `repositories/health_repository.py` — `SELECT 1`로 DB 연결 확인, 예외는 잡지 않고 그대로 올림
+  - `services/health_service.py` — 2초 타임아웃(`asyncio.wait_for`), 실패를 ok/error로 판정. 로그엔 예외 종류 이름만 남겨 접속 정보 노출 방지
+  - `api/health.py` — 실패 시 `response.status_code`만 503으로 바꿔 `response_model` 검사 유지
+- `core/db.py`에 `pool_pre_ping=True` 추가 — DB 재시작 후 끊긴 연결 재사용 방지
+- 동작 확인 (`curl.exe -i`) — 정상 `200 {"status":"ok","database":"ok"}`, `docker compose stop` 후 `503 {"status":"error","database":"error"}`(5초 내), `start` 직후 첫 요청 바로 `200`
+- `04_api-spec.md` 4.2절 보강 — 503 응답 예시, `status` 판정 규칙(모든 항목 ok일 때만 ok), 공통 에러 형식의 예외임을 명시, DB 확인 타임아웃 2초
+- `alembic init -t async`로 마이그레이션 초기화
+  - `alembic.ini`의 `sqlalchemy.url`은 비워두고 `env.py`가 `.env` → `config.py`를 통해 읽도록 구성 (비밀값 커밋 방지)
+  - `file_template`에 날짜·rev 규칙 적용
+  - `models/base.py`에 `DeclarativeBase` 기반 `Base` 추가, `target_metadata = Base.metadata` 연결
+  - `compare_type=True`로 컬럼 타입 변경까지 감지
+  - `alembic current` 정상 실행 확인 (`Context impl PostgresqlImpl.`)
+- pytest 설정 및 health 테스트 1개 — `pytest.ini`(`asyncio_mode=auto`), `conftest.py`에 `ASGITransport` 기반 `AsyncClient` fixture, `1 passed in 0.07s`
+
+**막힌 것 · 해결**
+- `alembic current` 실행 시 `UnicodeDecodeError: 'cp949' codec can't decode byte 0xec in position 3586: illegal multibyte sequence` → alembic이 `alembic.ini`를 `encoding="locale"`(한글 윈도우 기본값 cp949)로 읽는데 주석은 UTF-8 한글이라 충돌. **`.ini` 설정 파일엔 한글 주석을 쓰지 않는다**로 정리하고 영문으로 교체해 해결
+- `api/health.py`에서 `responses`를 `response`로 오타 → `TypeError: APIRouter.get() got an unexpected keyword argument 'response'`. 데코레이터의 `responses`(문서용)와 함수 인자 `response`(실제 응답 객체)가 한 블록에 같이 있어 헷갈리기 쉬움
+- `env.py`에서 `settings = get_settings`로 괄호 누락 → 함수 자체를 변수에 담아 `AttributeError` 발생 예정이었음. 실행 전 검수에서 발견
+
+**다음 할 일**
+- `feat/backend-skeleton` PR 생성 · `main` 병합
+- 프론트엔드 시작: Vite + Vue 3 + TypeScript 프로젝트 생성, Tailwind + shadcn-vue 설치
+- 화면에 health 결과 표시(연결 확인용 임시 화면)까지 가면 M1 완료 기준 충족
+
+---
+
 ### 2026-09-17 (목/오후/학교 PC) · M1
 
 **한 일**
