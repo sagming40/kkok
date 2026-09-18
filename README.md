@@ -96,8 +96,13 @@ kkok/
 │  │  └─ main.py
 │  ├─ alembic/
 │  └─ tests/
-├─ docs/                    # 설계 문서 · 마일스톤 · 개발 일지
+├─ docs/                    # 설계 문서 5종
+├─ .env.example             # .env 예시
+├─ .gitignore
+├─ DEVLOG.md                # 개발 일지
 ├─ docker-compose.yml
+├─ MILESTONES.md            # 마일스톤 · 개발 로드맵
+├─ README.md
 └─ .github/workflows/
 ```
 
@@ -127,12 +132,13 @@ docker compose up -d
 
 ### 3. 백엔드 실행
 
-```bash
+```PowerShell
 cd backend
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-source .venv/bin/activate
-pip install -r requirements.txt
+# Windows cmd: .venv\Scripts\activate
+# macOS / Linux: source .venv/bin/activate
+.venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
 alembic upgrade head
 uvicorn app.main:app --reload
 ```
@@ -160,7 +166,7 @@ pytest
 
 | 이름 | 설명 | 예시 |
 |---|---|---|
-| `DATABASE_URL` | PostgreSQL 연결 주소 (async) | `postgresql+asyncpg://kkok:kkok@localhost:5432/kkok` |
+| `DATABASE_URL` | PostgreSQL 연결 주소 (async) | `postgresql+asyncpg://kkok:kkok@localhost:5433/kkok` |
 | `REDIS_URL` | Redis 연결 주소 | `redis://localhost:6379/0` |
 | `BASE_URL` | 짧은 주소 앞부분 | `http://localhost:8000` |
 | `JWT_SECRET` | JWT 서명 키 | 충분히 긴 무작위 문자열 |
@@ -175,7 +181,7 @@ pytest
 | 마일스톤 | 내용 | 예상 기간 | 상태 |
 |:-:|---|---|:-:|
 | M0 | 설계 | ~ 2026-09-17 | ✅ |
-| M1 | 개발 환경과 뼈대 | 2026-09 ~ 10 | ⬜ |
+| M1 | 개발 환경과 뼈대 | 2026-09 ~ 10 | 🟨 |
 | M2 | 줄이고 이동하기 | 2026-10 | ⬜ |
 | M3 | 로그인 | 2026-10 ~ 11 | ⬜ |
 | M4 | 초대제와 관리자 | 2026-11 | ⬜ |
@@ -184,7 +190,7 @@ pytest
 | M8 | 배포 (`v1.0.0`) | 2027-02 | ⬜ |
 | M7 | 확장 기능 (`v1.1.0`) | 2027-03 | ⬜ |
 
-자세한 작업 목록과 완료 기준은 [MILESTONES](docs/MILESTONES.md)를 참고하세요.
+자세한 작업 목록과 완료 기준은 [MILESTONES](MILESTONES.md)를 참고하세요.
 
 ## 개발 규칙
 

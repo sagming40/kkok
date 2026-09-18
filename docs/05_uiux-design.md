@@ -969,7 +969,7 @@ flowchart LR
 ## 11. 남은 미정 사항
 
 - [x] ~~색상 팔레트 · 폰트~~ → 코랄 오렌지 `#FF6B4A` + Pretendard, shadcn-vue 기본 테마 위에 적용 (1장)
-- [ ] 차트 라이브러리 최종 선택 (ECharts vs ApexCharts)
+- [x] 차트 라이브러리 최종 선택 (**ECharts** vs ~~ApexCharts~~)
 - [ ] 손가락 로고 · 일러스트 제작 방식
 - [ ] QR 코드 기능 포함 여부
 - [ ] 로그인 기기 관리 · 히트맵 포함 여부 (3단계 선택 기능)

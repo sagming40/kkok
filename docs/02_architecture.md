@@ -370,11 +370,11 @@ flowchart LR
 
 ## 10. 미정 사항 (ERD 단계에서 결정)
 
-- [x] ~~짧은 코드 생성 방식~~ → 무작위 문자열 7자 (`kkok-erd.md` 1장)
+- [x] ~~짧은 코드 생성 방식~~ → 무작위 문자열 7자 (`03_erd.md` 1장)
   - 무작위: 주소 예측이 어렵지만 중복 검사 필요
   - 번호 변환: 중복이 없지만 순서가 보여 다른 링크를 훑어보기 쉬움
-- [x] ~~JWT 보관 위치와 재발급 방식~~ → httpOnly 쿠키 + DB 저장 Refresh Token (`kkok-erd.md` 9장)
+- [x] ~~JWT 보관 위치와 재발급 방식~~ → httpOnly 쿠키 + DB 저장 Refresh Token (`03_erd.md` 9장)
 - [x] ~~권한 변경 시 기존 JWT 처리 방식~~ → 권한은 요청마다 DB에서 확인
 - [ ] Redis 캐시 만료 시간
 - [ ] 로그인 시도 제한 · 생성 횟수 제한의 구체적 수치
-- [ ] 차트 라이브러리 최종 선택 (ECharts vs ApexCharts)
+- [x] 차트 라이브러리 최종 선택 (**ECharts** vs ~~ApexCharts~~)
