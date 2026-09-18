@@ -282,12 +282,22 @@ Cache-Control: no-store
 
 🌐 공개 · 1단계
 
+성공 시 `200`
+
 ```json
 { "status": "ok", "database": "ok", "redis": "ok" }
 ```
 
+실패 시 `503`
+
+```json
+{ "status": "error", "database": "error" }
+```
+
 - Docker Compose · 배포 환경에서 "서버가 살아 있는지" 확인하는 데 쓴다.
-- DB나 Redis 연결이 안 되면 `503`과 함께 해당 항목을 `"error"`로 표시한다.
+- `status`는 **모든 항목이 `ok`일 때만** `ok`이고, 하나라도 `error`면 `error`다.
+- health는 3.1절 공통 에러 형식의 **예외**다. 어느 부품이 실패했는지 항목별로 보여줘야 하므로, 실패해도 성공 때와 같은 모양으로 응답한다.
+- DB 확인은 최대 2초까지만 기다린다. 넘으면 `error`로 본다.
 - `redis` 항목은 Redis가 도입되는 **M3부터** 응답에 포함한다. M1~M2에서는 `status`, `database`만 돌려준다.
 
 ---
